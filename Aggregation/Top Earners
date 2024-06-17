@@ -1,0 +1,8 @@
+SELECT total_earnings AS max_total_earnings,
+       COUNT(*) AS num_employees_with_max_earnings
+FROM (
+    SELECT employee_id, (months * salary) AS total_earnings
+    FROM Employee
+) AS Earnings
+WHERE total_earnings = (SELECT MAX(months * salary) FROM Employee)
+GROUP BY total_earnings;
