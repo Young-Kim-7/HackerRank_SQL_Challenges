@@ -37,3 +37,19 @@ FROM (
             ORDER BY LAT_N
             LIMIT 1
             ) AS smallest;
+
+# 19
+SELECT ROUND(SQRT((b-a)*(b-a) + (d-c)*(d-c)),4)
+FROM (
+            SELECT MIN(LAT_N) AS a, MIN(LONG_W) AS c, MAX(LAT_N) AS b, MAX(LONG_W) AS d 
+            FROM STATION
+            ) AS Minmax;
+
+# 20
+SELECT ROUND(LAT_N,4)
+FROM
+            (
+            SELECT LAT_N,
+            RANK( ) OVER(ORDER BY LAT_N DESC) AS RANKING
+            FROM STATION) AS sub
+WHERE RANKING = (SELECT ROUND ( COUNT(LAT_N) / 2) FROM STATION);
