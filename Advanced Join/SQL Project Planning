@@ -1,0 +1,11 @@
+select min(q.start_date) as pjt_start_date, max(q.end_date) as pjt_end_date
+from (
+            select
+            p.start_date, p.end_date,
+            p.end_date - p.row_num as diff
+            from 
+                    (select start_date, end_date, row_number( ) over (order by start_date) as row_num
+                     from projects) p 
+) q
+group by q.diff
+order by  count(*), pjt_start_date
