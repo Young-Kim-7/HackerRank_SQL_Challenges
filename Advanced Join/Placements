@@ -1,0 +1,11 @@
+select s.name from students s
+
+inner join friends f on s.id=f.id
+
+inner join packages p on f.id=p.id
+
+inner join packages p1 on f.friend_id=p1.id
+
+where p1.salary>p.salary 
+
+order by p1.salary asc;
