@@ -5,5 +5,5 @@ SELECT  CASE
                 Grade,
                 Marks
 FROM Students
-LEFT JOIN Grades ON Marks <= Max_Mark AND Marks >= Min_Mark
+JOIN Grades ON Marks <= Max_Mark AND Marks >= Min_Mark
 ORDER BY Grade DESC, Name, Marks
