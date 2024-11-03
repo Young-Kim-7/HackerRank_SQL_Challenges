@@ -1,0 +1,11 @@
+select w.id, wp.age, w.coins_needed, w.power
+from Wands w
+join Wands_Property wp ON w.code = wp.code
+join (
+    select age, min(coins_needed) as min_gold, power
+    from Wands w 
+    join Wands_Property wp ON w.code = wp.code
+    where is_evil=0
+    group by wp.age, w.power
+) as sub ON wp.age = sub.age AND w.power = sub.power AND w.coins_needed = sub.min_gold
+order by w.power DESC, wp.age DESC;
